@@ -1,30 +1,27 @@
 function app() {
 
   let svg;
-  let map = MapWithLayers(); // component to handle the map
-  let migrants; // variable containing all the reports
+  let map = MapWithLayers();
+  let migrants;
 
-  // crossfilter data management
-  let cf; // crossfilter instance
-  let dYear; // dimension for Year
-  let dRecordType; // dimension for RecordType
-  let dMonth; // dimension for Month
-  let dVesselType; // dimension for VesselType
+  let cf;
+  let dYear;
+  let dRecordType;
+  let dMonth;
+  let dVesselType;
 
   let colorByReport = d3.scaleOrdinal()
     .domain(["Interdiction", "Landing"])
-    .range(["blue", "orange"]);
+    .range(["darkorange", "brown"]);
 
-  // dispacther for hte events
   var dispatch = d3.dispatch("changeYear", "changeRecordType");
 
   function me(selection) {
 
     console.log('seelction', selection.node());
 
-    // Creation of the containing SVG element for the map
-    //
     svg = selection.append("svg")
+        .attr('style','background-color:lightskyblue')
       .attr('height', 500)
       .attr('width', "100%");
 
@@ -64,39 +61,6 @@ function app() {
           return d.VesselType
         });
 
-        // dRecordType.filterAll();
-        console.log("years", dYear.group().reduceCount().all());
-        console.log("recordType", dRecordType.group().reduceCount().all());
-        console.log("vesselType", dVesselType.group().reduceCount().all());
-
-        // select count(*) from migrants where VesselType=="Rustic”
-        // dVesselType.filter("Go Fast");
-        console.log("num reports (Go Fast)", cf.groupAll().reduceCount());
-        // select sum(Passengers) from migrants where VesselType=="Rustic”
-        console.log("num passengers (Go Fast)", cf.groupAll().reduceSum(function(d) {
-          return d.Passengers
-        }).value())
-        // select sum(NumDeaths) from migrants where VesselType=="Rustic”
-        console.log("num deaths (Go Fast)", cf.groupAll().reduceSum(function(d) {
-          return d.NumDeaths
-        }))
-        // select VesselType, count(*) from migrants group by VesselType
-        var countVesselType = dVesselType.group().reduceCount();
-        console.log(countVesselType.all());
-
-        // how many report?
-        // select count(*) from migrants
-        console.log("num reports", cf.groupAll().reduceCount().value());
-
-        // select sum(Passengers) from migrants
-        console.log("num passengers", cf.groupAll().reduceSum(function(d) {
-          return d.Passengers
-        }).value())
-
-        // select sum(NumDeaths) from migrants
-        console.log("num deaths", cf.groupAll().reduceSum(function(d) {
-          return d.NumDeaths
-        }).value())
 
         createCounters();
         createCharts();
@@ -135,16 +99,15 @@ function app() {
         let extentY = d3.extent(migrants, function(d) {
           return d.EncounterCoords[1]
         });
-        console.log("extentX", extentX);
-        console.log("extentY", extentY);
+
         let centroid = [(extentX[0] + extentX[1]) / 2, (extentY[0] + extentY[1]) / 2];
-        console.log("centroid", centroid);
 
         map.center(centroid)
           .scale(3000);
 
         let gReports = svg.append("g")
           .attr("class", "reports")
+            .attr('fill','red')
           .datum(fcReports)
           .call(map);
 
@@ -160,7 +123,6 @@ function app() {
 
     d3.json('assets/data/world.geojson')
       .then(function(world) {
-        // removing Antartide since there is a problem with the contour geometry
         world.features = world.features.filter(function(d) {
           return d.properties.CNTR_ID != "AQ"
         });
@@ -247,12 +209,13 @@ function app() {
       .attr('id', 'mode-group')
       .attr('class', 'btn-group year-group')
       .attr('data-toggle', 'buttons')
-      .attr('style', 'margin-right:20px; margin-bottom: 10px')
+      .attr('style', ' margin-right:20px; margin-bottom: 10px')
       .selectAll("button")
       .data([2005, 2006, 2007])
       .enter()
       .append("button")
       .attr('class','btn btn-group btn-outline-primary')
+        .attr('style','background-color:#A9A9A9')
       .attr('role', 'group')
       // .append("input")
       // 			.attr({type:"radio", name:"mode", id:"option1"})
@@ -274,11 +237,12 @@ function app() {
       .attr('data-toggle', 'buttons')
       .attr('style', 'margin-right:20px; margin-bottom: 10px')
       .selectAll("button")
-      .data(["All", "Interdiction", "Landing"])
+      .data(["Both", "Interdiction", "Landing"])
       .enter()
       .append("button")
       .attr('class','btn btn-group btn-outline-primary')
-      .attr('role', 'group')
+        .attr('style','background-color:#A9A9A9')
+        .attr('role', 'group')
       // .append("input")
       // 			.attr({type:"radio", name:"mode", id:"option1"})
       .text(function(d) {
@@ -293,7 +257,7 @@ function app() {
   function registerEventListeners() {
     var colorReport = d3.scaleOrdinal()
       .domain(["Interdiction", "Landing"])
-      .range(["blue", "orange"]);
+      .range(["darkorange", "brown"]);
 
     dispatch.on("changeYear.buttons", function(newYear) {
       console.log("changeYear.buttons", newYear);
@@ -367,7 +331,7 @@ function app() {
 		var fcReports = {
 			type:"FeatureCollection",
 			features: cfDimension.top(Infinity)
-			.map(function(d,i){  // for each entry in Museums dictionary
+			.map(function(d,i){
 				if(d.EncounterCoords)
 					return {
 						type:"Feature",
