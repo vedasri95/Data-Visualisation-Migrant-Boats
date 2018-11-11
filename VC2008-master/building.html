@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Evacuation Building</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" media="screen">
+
+  <script src="http://d3js.org/d3.v5.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/js/buildingBitmap.js" charset="utf-8"></script>
+  <script src="assets/js/person-list.js" charset="utf-8"></script>
+  <script src="assets/js/trajectories.js" charset="utf-8"></script>
+
+  <style media="screen">
+    svg g.trajs path{
+      stroke: #000;
+    }
+    
+    svg g.trajs path.active{
+      stroke: #f00;
+    }
+  </style>
+</head>
+
+<body id="main">
+  <div class="container">
+    <h1>Building</h1>
+    <div class="row">
+      <div id="building" class="col-md-10">
+
+      </div>
+      <div id="persons" class="col-md-2">
+
+      </div>
+    </div>
+    <div class="row">
+      <div id="linecharts">
+
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/building.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+
+</html>

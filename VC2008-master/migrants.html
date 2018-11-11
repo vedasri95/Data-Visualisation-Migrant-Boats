@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vast Challenge 2008</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="crossfilter.min.js" charset="utf-8"></script>
+
+    <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="assets/js/counter.js" charset="utf-8"></script>
+    <script src="assets/js/map.js" charset="utf-8"></script>
+    <script src="assets/js/chart.js" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+            #viz .reports path{
+
+            }
+
+            #viz .mapWorld path{
+                fill: lightgray;
+            }
+
+            .charts{
+              height:300px;
+            }
+        </style>
+  </head>
+  <body class="container">
+    <h1 id="migrant_boats">Migrant Boats</h1>
+        <div id="toolbar" class="row">
+
+        </div>
+
+        <div class="row">
+            <div id="viz" class="col-md-8">
+
+            </div>
+            <div id="counters" class="col-md-4">
+
+            </div>
+        </div>
+        <div class="row">
+            <div id="charts" class="row" style="width:100%">
+
+            </div>
+        </div>
+        <div id="description">
+            <p>The map shows a visual representation of the migrant flows over three years
+              from the Isla de Sueno towards United States and Mexico. Each point on the map
+              represent an event registered by the US Coast Guard: a green point represent
+              a landing point of the boat; a red point represent an interdiction of the Coast
+              Guard in that position. The map and the linked displays with charts and statistics
+              allow to understand the evolution of the migration during the three years.</p>
+            <p>The number of boats has increased along the years. On average there are 150 more
+              attempts with respect to the previous year. The proportion of the three types of
+              vessels (Rustic, Raft, Go Fast) is constant. There is no evidence that a vessel
+              type is more effective than the others. Considering the respective group of
+              records of type <a href="#" class="RecordType">Landing</a> and
+              <a href="#" class="RecordType">Interdiction</a>, the ratio of the three type
+              of vessels is comparable.</p>
+            <p>The effectiveness of the Coast Guard during the three years shows an interdiction
+              every two attempts, with a success rate of around 51%. However, this performance
+              has lowered during the years. In <a href="#" class="Year">2005</a> it was around
+              70%. In <a href="#" class="Year">2006</a> has lowered to 56%, and in
+              <a href="#" class="Year">2007</a> to 42%.</p>
+        </div>
+        <script src="assets/js/migrants.js" charset="utf-8"></script>
+  </body>
+</html>
