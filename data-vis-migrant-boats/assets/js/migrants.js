@@ -13,7 +13,7 @@ function app() {
 
   let colorByReport = d3.scaleOrdinal()
     .domain(["Interdiction", "Landing"])
-    .range(["red", "green"]);
+    .range(["blue", "orange"]);
 
   // dispacther for hte events
   var dispatch = d3.dispatch("changeYear", "changeRecordType");
@@ -174,17 +174,17 @@ function app() {
   // utility functions
   function createCounters() {
     counterDescriptor = [{
-      measure: "# Records",
+      measure: "Number of Records:",
       cfAggregator: cf.groupAll().reduceCount(),
       classed: "counter-num-records"
     }, {
-      measure: "# Passengers",
+      measure: "Number of Passengers:",
       cfAggregator: cf.groupAll().reduceSum(function(d) {
         return d.Passengers
       }),
       classed: "counter-Passengers"
     }, {
-      measure: "# Deaths",
+      measure: "Number of  Deaths:",
       cfAggregator: cf.groupAll().reduceSum(function(d) {
         return d.NumDeaths
       }),
@@ -293,7 +293,7 @@ function app() {
   function registerEventListeners() {
     var colorReport = d3.scaleOrdinal()
       .domain(["Interdiction", "Landing"])
-      .range(["red", "green"]);
+      .range(["blue", "orange"]);
 
     dispatch.on("changeYear.buttons", function(newYear) {
       console.log("changeYear.buttons", newYear);
