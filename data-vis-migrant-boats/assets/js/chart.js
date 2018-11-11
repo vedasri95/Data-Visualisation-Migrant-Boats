@@ -18,8 +18,7 @@ function CrossFilterChart(){
 	function me(selection){
 		let myData = transformData(selection.datum())
 		container = selection;
-		console.log("chart data", myData);
-		console.log('node chart', container.node());
+
 
 		plot = Plotly.newPlot(container.node(), myData, layout,{displayModeBar: false});
 	}
