@@ -299,7 +299,7 @@ function app() {
     });
 
     dispatch.on("changeRecordType.charts", function(newRecordType) {
-      if (newRecordType == "All")
+      if (newRecordType == "Both")
         dRecordType.filterAll()
       else
         dRecordType.filter(newRecordType);
