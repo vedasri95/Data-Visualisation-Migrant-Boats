@@ -12,7 +12,7 @@ function app() {
 
   let colorByReport = d3.scaleOrdinal()
     .domain(["Interdiction", "Landing"])
-    .range(["darkorange", "brown"]);
+    .range(["green", "brown"]);
 
   var dispatch = d3.dispatch("changeYear", "changeRecordType");
 
@@ -257,7 +257,7 @@ function app() {
   function registerEventListeners() {
     var colorReport = d3.scaleOrdinal()
       .domain(["Interdiction", "Landing"])
-      .range(["darkorange", "brown"]);
+      .range(["green", "brown"]);
 
     dispatch.on("changeYear.buttons", function(newYear) {
       console.log("changeYear.buttons", newYear);
